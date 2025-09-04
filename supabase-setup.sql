@@ -17,6 +17,10 @@ CREATE INDEX IF NOT EXISTS idx_waitlist_created_at ON waitlist(created_at DESC);
 -- Enable Row Level Security (RLS)
 ALTER TABLE waitlist ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Allow anonymous insert" ON waitlist;
+DROP POLICY IF EXISTS "Allow anonymous select" ON waitlist;
+
 -- Create policy to allow anonymous users to insert emails
 CREATE POLICY "Allow anonymous insert" ON waitlist
     FOR INSERT 

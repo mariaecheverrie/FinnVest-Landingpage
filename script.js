@@ -173,15 +173,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
-                // Send welcome email
+                // Send welcome email using EmailJS
                 try {
-                    await fetch('/.netlify/functions/send-welcome-email', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email: email })
-                    });
+                    if (typeof sendWelcomeEmail === 'function') {
+                        const emailResult = await sendWelcomeEmail(email);
+                        if (emailResult.success) {
+                            console.log('Welcome email sent successfully');
+                        } else {
+                            console.log('Email sending failed:', emailResult.error);
+                        }
+                    } else {
+                        console.log('Email service not available');
+                    }
                 } catch (emailError) {
                     console.log('Email sending failed, but signup was successful:', emailError);
                 }
@@ -239,15 +242,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
-                // Send welcome email
+                // Send welcome email using EmailJS
                 try {
-                    await fetch('/.netlify/functions/send-welcome-email', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email: email })
-                    });
+                    if (typeof sendWelcomeEmail === 'function') {
+                        const emailResult = await sendWelcomeEmail(email);
+                        if (emailResult.success) {
+                            console.log('Welcome email sent successfully');
+                        } else {
+                            console.log('Email sending failed:', emailResult.error);
+                        }
+                    } else {
+                        console.log('Email service not available');
+                    }
                 } catch (emailError) {
                     console.log('Email sending failed, but signup was successful:', emailError);
                 }
