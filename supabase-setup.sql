@@ -33,3 +33,18 @@ CREATE POLICY "Allow anonymous select" ON waitlist
 GRANT USAGE ON SCHEMA public TO anon;
 GRANT ALL ON waitlist TO anon;
 GRANT USAGE, SELECT ON SEQUENCE waitlist_id_seq TO anon;
+
+-- Create a function to handle CORS preflight requests
+CREATE OR REPLACE FUNCTION handle_cors_preflight()
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- This function handles CORS preflight requests
+    -- It's called by the API when OPTIONS requests are made
+    PERFORM 1;
+END;
+$$;
+
+-- Grant execute permission on the function
+GRANT EXECUTE ON FUNCTION handle_cors_preflight() TO anon;
