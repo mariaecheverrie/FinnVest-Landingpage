@@ -173,6 +173,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
+                // Send welcome email
+                try {
+                    await fetch('/.netlify/functions/send-welcome-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+                } catch (emailError) {
+                    console.log('Email sending failed, but signup was successful:', emailError);
+                }
+                
                 showSuccessNotification();
                 form.reset();
             } else {
@@ -226,6 +239,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
+                // Send welcome email
+                try {
+                    await fetch('/.netlify/functions/send-welcome-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+                } catch (emailError) {
+                    console.log('Email sending failed, but signup was successful:', emailError);
+                }
+                
                 showSuccessNotification();
                 form.reset();
             } else {
