@@ -173,17 +173,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
-                // Send welcome email using EmailJS
+                // Send welcome email using Resend
                 try {
-                    if (typeof sendWelcomeEmail === 'function') {
-                        const emailResult = await sendWelcomeEmail(email);
+                    if (typeof sendWelcomeEmailResend === 'function') {
+                        const emailResult = await sendWelcomeEmailResend(email);
                         if (emailResult.success) {
-                            console.log('Welcome email sent successfully');
+                            console.log('Welcome email sent successfully via Resend');
                         } else {
                             console.log('Email sending failed:', emailResult.error);
                         }
                     } else {
-                        console.log('Email service not available');
+                        console.log('Resend email service not available');
                     }
                 } catch (emailError) {
                     console.log('Email sending failed, but signup was successful:', emailError);
@@ -242,17 +242,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
-                // Send welcome email using EmailJS
+                // Send welcome email using Resend
                 try {
-                    if (typeof sendWelcomeEmail === 'function') {
-                        const emailResult = await sendWelcomeEmail(email);
+                    if (typeof sendWelcomeEmailResend === 'function') {
+                        const emailResult = await sendWelcomeEmailResend(email);
                         if (emailResult.success) {
-                            console.log('Welcome email sent successfully');
+                            console.log('Welcome email sent successfully via Resend');
                         } else {
                             console.log('Email sending failed:', emailResult.error);
                         }
                     } else {
-                        console.log('Email service not available');
+                        console.log('Resend email service not available');
                     }
                 } catch (emailError) {
                     console.log('Email sending failed, but signup was successful:', emailError);
