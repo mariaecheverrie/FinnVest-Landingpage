@@ -7,7 +7,7 @@ A modern, responsive landing page for FinnVest - a financial education platform 
 - **Bilingual Support**: English and Spanish language switching
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
 - **Interactive Elements**: Scroll-reveal animations, hover effects, and smooth transitions
-- **Waitlist System**: Real-time database integration with Supabase for lead generation
+- **Waitlist System**: Email collection for lead generation
 - **Email Validation**: Duplicate email detection and format validation
 - **Modern UI**: Glass morphism effects, gradients, and 3D elements
 - **Accessibility**: Semantic HTML and keyboard navigation support
@@ -21,7 +21,7 @@ A modern, responsive landing page for FinnVest - a financial education platform 
 - **HTML5**: Semantic markup
 - **CSS3**: Modern styling with Flexbox, Grid, and animations
 - **JavaScript**: Vanilla JS for interactivity and language switching
-- **Supabase**: Backend database for waitlist management
+- **JavaScript**: Email collection and form handling
 - **Font Awesome**: Icons
 - **Google Fonts**: Nunito font family
 
@@ -32,12 +32,10 @@ FinnVest-Website/
 ├── index.html              # Main HTML file
 ├── styles.css              # All CSS styles
 ├── script.js               # JavaScript functionality
-├── supabase-config.js      # Supabase configuration and functions
-├── supabase-config.example.js  # Example configuration file
-├── SUPABASE_SETUP.md       # Supabase setup instructions
+├── package.json            # Node.js dependencies
 ├── logo.png                # Company logo
 ├── finnvest.png            # Platform logo
-├── landing.png             # Hero section image
+├── images/                 # Image assets
 └── README.md               # This file
 ```
 
@@ -57,13 +55,9 @@ FinnVest-Website/
    cd Finnvest-Website
    ```
 
-2. **Configure Supabase** (required for waitlist functionality):
+2. **Install dependencies** (optional):
    ```bash
-   # Copy the example configuration
-   cp supabase-config.example.js supabase-config.js
-   
-   # Edit supabase-config.js with your Supabase credentials
-   # See SUPABASE_SETUP.md for detailed instructions
+   npm install
    ```
 
 3. **Open in your preferred editor:**
@@ -237,27 +231,21 @@ git branch -a
 
 **Opciones de Despliegue Gratuito:**
 
-#### 1. Netlify (Más Fácil)
-- ✅ Despliegue automático desde GitHub
-- ✅ HTTPS automático
-- ✅ Dominio personalizado gratuito
-- 📖 Ver `DEPLOYMENT_GUIDE.md` para instrucciones detalladas
-
-#### 2. GitHub Pages (Directo)
+#### 1. GitHub Pages (Recomendado)
 - ✅ Totalmente gratuito
 - ✅ Integrado con GitHub
+- ✅ HTTPS automático
 - Tu sitio en: `https://mariaecheverrie.github.io/Finnvest-Website`
 
-#### 3. Vercel (Muy Rápido)
+#### 2. Vercel (Muy Rápido)
 - ✅ Despliegue automático
 - ✅ Excelente rendimiento
 - ✅ HTTPS automático
 
-### 📁 Archivos de Configuración Incluidos
-- `netlify.toml` - Configuración para Netlify
-- `deploy.sh` - Script de despliegue automático
-- `DEPLOYMENT_GUIDE.md` - Guía completa
-- `DEPLOYMENT_WINDOWS.md` - Guía específica para Windows
+#### 3. Netlify (Fácil)
+- ✅ Despliegue automático desde GitHub
+- ✅ HTTPS automático
+- ✅ Dominio personalizado gratuito
 
 ## 📞 Support
 
