@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', throttle(handleParallax, 16));
 
     // Form submission handlers
-    function joinWaitingList(event) {
+    async function joinWaitingList(event) {
         event.preventDefault();
         const form = event.target;
         const email = form.querySelector('input[type="email"]').value;
@@ -152,19 +152,49 @@ document.addEventListener('DOMContentLoaded', function() {
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
         button.disabled = true;
         
-        // Simulate API call
-        setTimeout(() => {
-            // Show success notification
-            showSuccessNotification();
+        try {
+            // Check if email already exists
+            const emailCheck = await checkEmailExists(email);
             
-            // Reset form
-            form.reset();
+            if (emailCheck.exists) {
+                // Email already exists
+                button.innerHTML = '<i class="fas fa-info-circle"></i> Email ya registrado';
+                button.style.background = '#ff9800';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+                return;
+            }
+            
+            // Add email to Supabase
+            const result = await addToWaitlist(email);
+            
+            if (result.success) {
+                showSuccessNotification();
+                form.reset();
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            console.error('Error submitting email:', error);
+            button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error';
+            button.style.background = '#f44336';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.disabled = false;
+            }, 3000);
+        } finally {
             button.innerHTML = originalText;
             button.disabled = false;
-        }, 1500);
+        }
     }
 
-    function joinFinalWaitlist(event) {
+    async function joinFinalWaitlist(event) {
         event.preventDefault();
         const form = event.target;
         const email = form.querySelector('input[type="email"]').value;
@@ -175,16 +205,46 @@ document.addEventListener('DOMContentLoaded', function() {
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
         button.disabled = true;
         
-        // Simulate API call
-        setTimeout(() => {
-            // Show success notification
-            showSuccessNotification();
+        try {
+            // Check if email already exists
+            const emailCheck = await checkEmailExists(email);
             
-            // Reset form
-            form.reset();
+            if (emailCheck.exists) {
+                // Email already exists
+                button.innerHTML = '<i class="fas fa-info-circle"></i> Email ya registrado';
+                button.style.background = '#ff9800';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+                return;
+            }
+            
+            // Add email to Supabase
+            const result = await addToWaitlist(email);
+            
+            if (result.success) {
+                showSuccessNotification();
+                form.reset();
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            console.error('Error submitting email:', error);
+            button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error';
+            button.style.background = '#f44336';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.disabled = false;
+            }, 3000);
+        } finally {
             button.innerHTML = originalText;
             button.disabled = false;
-        }, 1500);
+        }
     }
 
     // Success notification functions
