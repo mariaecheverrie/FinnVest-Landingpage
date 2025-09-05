@@ -2,7 +2,7 @@
 // Free tier: 3,000 emails/month
 
 const RESEND_API_KEY = 're_W4keufYm_AMEy8R94qsyuFggNB7ib7tgz'; // Your Resend API key
-const FROM_EMAIL = 'FinnVest <finnvest.edu@gmail.com>'; // Your Gmail address
+const FROM_EMAIL = 'FinnVest <mdmecheverri@gmail.com>'; // Your verified email address
 
 // Function to send welcome email using Resend
 async function sendWelcomeEmailResend(email) {
