@@ -416,34 +416,35 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Hero section entrance animations
     function initHeroAnimations() {
-        // Wait for page to fully load
-        window.addEventListener('load', function() {
-            console.log('Page loaded, starting hero animations...');
-            // Add a small delay to ensure everything is ready
-            setTimeout(() => {
-                const heroElements = document.querySelectorAll('.hero-element');
-                console.log('Found hero elements:', heroElements.length);
-                heroElements.forEach((element, index) => {
-                    console.log(`Animating element ${index + 1}:`, element.className);
-                    element.classList.add('animate');
-                });
-            }, 100);
-        });
+        console.log('Initializing hero animations...');
         
-        // Also try on DOMContentLoaded as backup
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, starting hero animations...');
-            setTimeout(() => {
-                const heroElements = document.querySelectorAll('.hero-element');
-                console.log('Found hero elements on DOM load:', heroElements.length);
-                heroElements.forEach((element, index) => {
-                    if (!element.classList.contains('animate')) {
-                        console.log(`Animating element ${index + 1} on DOM load:`, element.className);
-                        element.classList.add('animate');
-                    }
-                });
-            }, 200);
-        });
+        function startAnimations() {
+            console.log('Starting hero animations...');
+            const heroElements = document.querySelectorAll('.hero-element');
+            console.log('Found hero elements:', heroElements.length);
+            
+            if (heroElements.length === 0) {
+                console.log('No hero elements found!');
+                return;
+            }
+            
+            heroElements.forEach((element, index) => {
+                console.log(`Animating element ${index + 1}:`, element.className);
+                // Force a reflow to ensure the initial state is applied
+                element.offsetHeight;
+                element.classList.add('animate');
+            });
+        }
+        
+        // Try multiple approaches
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startAnimations);
+        } else {
+            startAnimations();
+        }
+        
+        // Backup with window load
+        window.addEventListener('load', startAnimations);
     }
     
     // Initialize hero animations
