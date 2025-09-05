@@ -6,6 +6,11 @@ const FROM_EMAIL = 'FinnVest <mdmecheverri@gmail.com>'; // Your verified email a
 
 // Function to send welcome email using Resend
 async function sendWelcomeEmailResend(email) {
+    console.log('🚀 Starting Resend email service...');
+    console.log('📧 Email to send to:', email);
+    console.log('📤 From email:', FROM_EMAIL);
+    console.log('🔑 API Key present:', !!RESEND_API_KEY);
+    
     try {
         const emailData = {
             from: FROM_EMAIL,
@@ -216,7 +221,13 @@ async function sendWelcomeEmailResend(email) {
         }
 
     } catch (error) {
-        console.error('Error sending email via Resend:', error);
+        console.error('❌ Error sending email via Resend:', error);
+        console.error('❌ Error details:', {
+            message: error.message,
+            status: error.status,
+            statusText: error.statusText,
+            response: error.response
+        });
         return { success: false, error: error.message };
     }
 }
