@@ -173,17 +173,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
-                // Send welcome email using Resend
+                // Send welcome email using Supabase Edge Function
                 try {
-                    if (typeof sendWelcomeEmailResend === 'function') {
-                        const emailResult = await sendWelcomeEmailResend(email);
-                        if (emailResult.success) {
-                            console.log('Welcome email sent successfully via Resend');
-                        } else {
-                            console.log('Email sending failed:', emailResult.error);
-                        }
+                    const emailResponse = await fetch('/.netlify/functions/send-welcome-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+                    
+                    if (emailResponse.ok) {
+                        const emailResult = await emailResponse.json();
+                        console.log('Welcome email sent successfully:', emailResult);
                     } else {
-                        console.log('Resend email service not available');
+                        console.log('Email sending failed, but signup was successful');
                     }
                 } catch (emailError) {
                     console.log('Email sending failed, but signup was successful:', emailError);
@@ -242,17 +246,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await addToWaitlist(email);
             
             if (result.success) {
-                // Send welcome email using Resend
+                // Send welcome email using Supabase Edge Function
                 try {
-                    if (typeof sendWelcomeEmailResend === 'function') {
-                        const emailResult = await sendWelcomeEmailResend(email);
-                        if (emailResult.success) {
-                            console.log('Welcome email sent successfully via Resend');
-                        } else {
-                            console.log('Email sending failed:', emailResult.error);
-                        }
+                    const emailResponse = await fetch('/.netlify/functions/send-welcome-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+                    
+                    if (emailResponse.ok) {
+                        const emailResult = await emailResponse.json();
+                        console.log('Welcome email sent successfully:', emailResult);
                     } else {
-                        console.log('Resend email service not available');
+                        console.log('Email sending failed, but signup was successful');
                     }
                 } catch (emailError) {
                     console.log('Email sending failed, but signup was successful:', emailError);
