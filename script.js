@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Initialize mobile autocomplete enhancement
-    enhanceMobileAutocomplete();
+    // enhanceMobileAutocomplete(); // Disabled to fix second email input issues
     
 
     // Add form event listeners
