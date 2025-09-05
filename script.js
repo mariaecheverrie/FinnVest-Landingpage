@@ -330,35 +330,83 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let isScrolling = false;
         let scrollTimeout;
+        let lastScrollTime = 0;
+        let touchStartTime = 0;
+        let touchStartY = 0;
         
-        // Detect when user is scrolling
+        // Detect when user is scrolling with more sensitivity
         window.addEventListener('scroll', function() {
             isScrolling = true;
+            lastScrollTime = Date.now();
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
-            }, 150); // Wait 150ms after scroll stops
+            }, 500); // Wait 500ms after scroll stops
         });
         
-        // Only allow focus on explicit click, not during scroll
+        // Track touch start for better detection
         finalEmailInput.addEventListener('touchstart', function(e) {
-            if (isScrolling) {
+            touchStartTime = Date.now();
+            touchStartY = e.touches[0].clientY;
+            
+            // If we just scrolled, prevent interaction
+            if (Date.now() - lastScrollTime < 1000) {
                 e.preventDefault();
                 return false;
             }
         });
         
-        // Allow focus only on click events
-        finalEmailInput.addEventListener('click', function() {
-            if (!isScrolling) {
-                this.focus();
+        // Track touch move to detect scrolling vs clicking
+        finalEmailInput.addEventListener('touchmove', function(e) {
+            const currentY = e.touches[0].clientY;
+            const deltaY = Math.abs(currentY - touchStartY);
+            
+            // If finger moved more than 10px, it's probably scrolling
+            if (deltaY > 10) {
+                isScrolling = true;
+                e.preventDefault();
+                return false;
             }
         });
         
-        // Prevent accidental focus during scroll
+        // Only allow focus on deliberate click with delay
+        finalEmailInput.addEventListener('touchend', function(e) {
+            const touchDuration = Date.now() - touchStartTime;
+            const currentY = e.changedTouches[0].clientY;
+            const deltaY = Math.abs(currentY - touchStartY);
+            
+            // Only allow if:
+            // 1. Not currently scrolling
+            // 2. Touch was longer than 100ms (deliberate)
+            // 3. Finger didn't move much (not scrolling)
+            // 4. Haven't scrolled recently
+            if (!isScrolling && 
+                touchDuration > 100 && 
+                deltaY < 5 && 
+                Date.now() - lastScrollTime > 1000) {
+                
+                // Add small delay to prevent accidental activation
+                setTimeout(() => {
+                    if (!isScrolling) {
+                        this.focus();
+                    }
+                }, 50);
+            } else {
+                e.preventDefault();
+            }
+        });
+        
+        // Prevent focus during scroll
         finalEmailInput.addEventListener('focus', function() {
-            if (isScrolling) {
+            if (isScrolling || Date.now() - lastScrollTime < 1000) {
                 this.blur();
+            }
+        });
+        
+        // Disable click events entirely for mobile
+        finalEmailInput.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
             }
         });
     }
