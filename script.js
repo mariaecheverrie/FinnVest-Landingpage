@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth scrolling for all anchor links
+    // Enhanced smooth scrolling for all anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -43,10 +43,46 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                // Get navbar height dynamically
+                const navbar = document.querySelector('.navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                
+                // Calculate target position
+                const targetPosition = targetSection.offsetTop - navbarHeight;
+                
+                // Check if smooth scrolling is supported
+                if ('scrollBehavior' in document.documentElement.style) {
+                    // Use native smooth scrolling
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Fallback: Use requestAnimationFrame for smoother animation
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
+                    const duration = 800; // 800ms animation
+                    let start = null;
+                    
+                    function animation(currentTime) {
+                        if (start === null) start = currentTime;
+                        const timeElapsed = currentTime - start;
+                        const progress = Math.min(timeElapsed / duration, 1);
+                        
+                        // Easing function for smooth animation
+                        const ease = progress < 0.5 
+                            ? 2 * progress * progress 
+                            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                        
+                        window.scrollTo(0, startPosition + distance * ease);
+                        
+                        if (timeElapsed < duration) {
+                            requestAnimationFrame(animation);
+                        }
+                    }
+                    
+                    requestAnimationFrame(animation);
+                }
             }
         });
     });
