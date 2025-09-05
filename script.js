@@ -323,6 +323,49 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize mobile autocomplete enhancement
     // enhanceMobileAutocomplete(); // Disabled to fix second email input issues
     
+    // Handle second email input sensitivity
+    function handleSecondEmailInput() {
+        const finalEmailInput = document.getElementById('finalEmailInput');
+        if (!finalEmailInput) return;
+        
+        let isScrolling = false;
+        let scrollTimeout;
+        
+        // Detect when user is scrolling
+        window.addEventListener('scroll', function() {
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 150); // Wait 150ms after scroll stops
+        });
+        
+        // Only allow focus on explicit click, not during scroll
+        finalEmailInput.addEventListener('touchstart', function(e) {
+            if (isScrolling) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Allow focus only on click events
+        finalEmailInput.addEventListener('click', function() {
+            if (!isScrolling) {
+                this.focus();
+            }
+        });
+        
+        // Prevent accidental focus during scroll
+        finalEmailInput.addEventListener('focus', function() {
+            if (isScrolling) {
+                this.blur();
+            }
+        });
+    }
+    
+    // Initialize second email input handling
+    handleSecondEmailInput();
+    
 
     // Add form event listeners
     const heroForm = document.getElementById('heroForm');
