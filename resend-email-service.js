@@ -14,7 +14,7 @@ async function sendWelcomeEmailResend(email) {
     try {
         const emailData = {
             from: FROM_EMAIL,
-            to: [email],
+            to: email,
             subject: '¡Bienvenido a FinnVest! 🚀 Tu futuro financiero comienza aquí',
             html: `
                 <!DOCTYPE html>
@@ -200,6 +200,8 @@ async function sendWelcomeEmailResend(email) {
                 </html>
             `
         };
+
+        console.log('📤 Sending email data to Resend:', JSON.stringify(emailData, null, 2));
 
         const response = await fetch('https://api.resend.com/emails', {
             method: 'POST',
