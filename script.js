@@ -414,6 +414,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize second email input handling
     handleSecondEmailInput();
     
+    // Hero section entrance animations
+    function initHeroAnimations() {
+        // Wait for page to fully load
+        window.addEventListener('load', function() {
+            // Add a small delay to ensure everything is ready
+            setTimeout(() => {
+                const heroElements = document.querySelectorAll('.hero-element');
+                heroElements.forEach(element => {
+                    element.classList.add('animate');
+                });
+            }, 100);
+        });
+    }
+    
+    // Initialize hero animations
+    initHeroAnimations();
+    
 
     // Add form event listeners
     const heroForm = document.getElementById('heroForm');
