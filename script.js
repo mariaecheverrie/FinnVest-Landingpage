@@ -418,18 +418,50 @@ document.addEventListener('DOMContentLoaded', function() {
     function initHeroAnimations() {
         // Wait for page to fully load
         window.addEventListener('load', function() {
+            console.log('Page loaded, starting hero animations...');
             // Add a small delay to ensure everything is ready
             setTimeout(() => {
                 const heroElements = document.querySelectorAll('.hero-element');
-                heroElements.forEach(element => {
+                console.log('Found hero elements:', heroElements.length);
+                heroElements.forEach((element, index) => {
+                    console.log(`Animating element ${index + 1}:`, element.className);
                     element.classList.add('animate');
                 });
             }, 100);
+        });
+        
+        // Also try on DOMContentLoaded as backup
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, starting hero animations...');
+            setTimeout(() => {
+                const heroElements = document.querySelectorAll('.hero-element');
+                console.log('Found hero elements on DOM load:', heroElements.length);
+                heroElements.forEach((element, index) => {
+                    if (!element.classList.contains('animate')) {
+                        console.log(`Animating element ${index + 1} on DOM load:`, element.className);
+                        element.classList.add('animate');
+                    }
+                });
+            }, 200);
         });
     }
     
     // Initialize hero animations
     initHeroAnimations();
+    
+    // Add manual trigger for testing (remove this later)
+    window.triggerHeroAnimations = function() {
+        console.log('Manual trigger: Starting hero animations...');
+        const heroElements = document.querySelectorAll('.hero-element');
+        console.log('Found hero elements:', heroElements.length);
+        heroElements.forEach((element, index) => {
+            element.classList.remove('animate');
+            setTimeout(() => {
+                element.classList.add('animate');
+                console.log(`Triggered animation for element ${index + 1}`);
+            }, index * 100);
+        });
+    };
     
 
     // Add form event listeners
