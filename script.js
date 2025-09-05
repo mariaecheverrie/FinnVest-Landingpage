@@ -177,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Email successfully added to waitlist');
                 showSuccessNotification();
                 form.reset();
+                button.innerHTML = originalText;
+                button.disabled = false;
             } else {
                 throw new Error(result.error);
             }
@@ -190,10 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.style.background = '';
                 button.disabled = false;
             }, 3000);
-        } finally {
-            button.innerHTML = originalText;
-            button.disabled = false;
-        }
     }
 
     async function joinFinalWaitlist(event) {
@@ -232,6 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Email successfully added to waitlist');
                 showSuccessNotification();
                 form.reset();
+                button.innerHTML = originalText;
+                button.disabled = false;
             } else {
                 throw new Error(result.error);
             }
@@ -245,10 +245,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.style.background = '';
                 button.disabled = false;
             }, 3000);
-        } finally {
-            button.innerHTML = originalText;
-            button.disabled = false;
-        }
     }
 
     // Success notification functions
