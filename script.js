@@ -43,12 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                // Use a more reliable smooth scrolling method
-                const targetPosition = targetSection.offsetTop - 80; // Account for fixed navbar
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
@@ -273,10 +270,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function scrollToHero() {
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
-            const targetPosition = heroSection.offsetTop - 80;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
+            heroSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
         }
     }
@@ -337,43 +333,44 @@ document.addEventListener('DOMContentLoaded', function() {
         let lastScrollTime = 0;
         let touchStartTime = 0;
         let touchStartY = 0;
+        let hasMoved = false;
         
-        // Detect when user is scrolling with more sensitivity
+        // Detect when user is scrolling
         window.addEventListener('scroll', function() {
             isScrolling = true;
             lastScrollTime = Date.now();
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
-            }, 500); // Wait 500ms after scroll stops
+            }, 1000); // Wait 1 second after scroll stops
         });
         
-        // Track touch start for better detection
+        // Track touch start
         finalEmailInput.addEventListener('touchstart', function(e) {
             touchStartTime = Date.now();
             touchStartY = e.touches[0].clientY;
+            hasMoved = false;
             
-            // If we just scrolled, prevent interaction
-            if (Date.now() - lastScrollTime < 1000) {
+            // If we just scrolled recently, prevent interaction
+            if (Date.now() - lastScrollTime < 2000) {
                 e.preventDefault();
                 return false;
             }
         });
         
-        // Track touch move to detect scrolling vs clicking
+        // Track touch move to detect scrolling
         finalEmailInput.addEventListener('touchmove', function(e) {
             const currentY = e.touches[0].clientY;
             const deltaY = Math.abs(currentY - touchStartY);
             
-            // If finger moved more than 10px, it's probably scrolling
-            if (deltaY > 10) {
-                isScrolling = true;
+            if (deltaY > 5) {
+                hasMoved = true;
                 e.preventDefault();
                 return false;
             }
         });
         
-        // Only allow focus on deliberate click with delay
+        // Only allow focus on very deliberate touches
         finalEmailInput.addEventListener('touchend', function(e) {
             const touchDuration = Date.now() - touchStartTime;
             const currentY = e.changedTouches[0].clientY;
@@ -381,20 +378,21 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Only allow if:
             // 1. Not currently scrolling
-            // 2. Touch was longer than 100ms (deliberate)
+            // 2. Touch was longer than 200ms (very deliberate)
             // 3. Finger didn't move much (not scrolling)
             // 4. Haven't scrolled recently
             if (!isScrolling && 
-                touchDuration > 100 && 
-                deltaY < 5 && 
-                Date.now() - lastScrollTime > 1000) {
+                touchDuration > 200 && 
+                deltaY < 3 && 
+                !hasMoved &&
+                Date.now() - lastScrollTime > 2000) {
                 
-                // Add small delay to prevent accidental activation
+                // Add delay to prevent accidental activation
                 setTimeout(() => {
                     if (!isScrolling) {
                         this.focus();
                     }
-                }, 50);
+                }, 100);
             } else {
                 e.preventDefault();
             }
@@ -402,12 +400,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Prevent focus during scroll
         finalEmailInput.addEventListener('focus', function() {
-            if (isScrolling || Date.now() - lastScrollTime < 1000) {
+            if (isScrolling || Date.now() - lastScrollTime < 2000) {
                 this.blur();
             }
         });
         
-        // Disable click events entirely for mobile
+        // Disable click events on mobile to force touch handling
         finalEmailInput.addEventListener('click', function(e) {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
@@ -417,7 +415,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize second email input handling
     handleSecondEmailInput();
-    
     
 
     // Add form event listeners
