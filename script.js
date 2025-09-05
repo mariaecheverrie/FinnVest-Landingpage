@@ -43,9 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Use a more reliable smooth scrolling method
+                const targetPosition = targetSection.offsetTop - 80; // Account for fixed navbar
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -270,9 +273,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function scrollToHero() {
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
-            heroSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const targetPosition = heroSection.offsetTop - 80;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
     }
@@ -414,37 +418,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize second email input handling
     handleSecondEmailInput();
     
-    // Hero section entrance animations
+    // Hero section entrance animations - SIMPLIFIED
     function initHeroAnimations() {
-        console.log('Initializing hero animations...');
-        
-        function startAnimations() {
-            console.log('Starting hero animations...');
+        // Simple approach - just add animate class after a delay
+        setTimeout(() => {
             const heroElements = document.querySelectorAll('.hero-element');
-            console.log('Found hero elements:', heroElements.length);
-            
-            if (heroElements.length === 0) {
-                console.log('No hero elements found!');
-                return;
-            }
-            
             heroElements.forEach((element, index) => {
-                console.log(`Animating element ${index + 1}:`, element.className);
-                // Force a reflow to ensure the initial state is applied
-                element.offsetHeight;
-                element.classList.add('animate');
+                setTimeout(() => {
+                    element.classList.add('animate');
+                }, index * 100);
             });
-        }
-        
-        // Try multiple approaches
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startAnimations);
-        } else {
-            startAnimations();
-        }
-        
-        // Backup with window load
-        window.addEventListener('load', startAnimations);
+        }, 500);
     }
     
     // Initialize hero animations
