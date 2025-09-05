@@ -418,35 +418,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize second email input handling
     handleSecondEmailInput();
     
-    // Hero section entrance animations - SIMPLIFIED
-    function initHeroAnimations() {
-        // Simple approach - just add animate class after a delay
-        setTimeout(() => {
-            const heroElements = document.querySelectorAll('.hero-element');
-            heroElements.forEach((element, index) => {
-                setTimeout(() => {
-                    element.classList.add('animate');
-                }, index * 100);
-            });
-        }, 500);
-    }
-    
-    // Initialize hero animations
-    initHeroAnimations();
-    
-    // Add manual trigger for testing (remove this later)
-    window.triggerHeroAnimations = function() {
-        console.log('Manual trigger: Starting hero animations...');
-        const heroElements = document.querySelectorAll('.hero-element');
-        console.log('Found hero elements:', heroElements.length);
-        heroElements.forEach((element, index) => {
-            element.classList.remove('animate');
-            setTimeout(() => {
-                element.classList.add('animate');
-                console.log(`Triggered animation for element ${index + 1}`);
-            }, index * 100);
-        });
-    };
     
 
     // Add form event listeners
