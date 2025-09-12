@@ -1,0 +1,22 @@
+{
+  "name": "finnvest-website",
+  "version": "1.0.0",
+  "description": "FinnVest - Financial education platform landing page",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000",
+    "serve": "npx http-server -p 8000"
+  },
+  "keywords": [
+    "financial",
+    "education",
+    "investment",
+    "landing-page"
+  ],
+  "author": "FinnVest Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

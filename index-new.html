@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinnVest - Aprende a invertir sin miedo | Tu primera inversión sin perder dinero</title>
+    <meta name="description" content="Aprende a invertir de forma práctica y divertida. Simula condiciones reales de mercado sin arriesgar tu dinero. Únete a miles de jóvenes que ya están construyendo su futuro financiero.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400;1,9..40,500;1,9..40,700&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=15.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js?v=7.1" defer></script>
+</head>
+<body>
+    <!-- Success Notification Popup -->
+    <div id="successNotification" class="success-notification">
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="notification-text">
+                <h3>¡Bienvenido al equipo!</h3>
+                <p>Tu email ha sido registrado exitosamente. Revisa tu bandeja de entrada (y spam) para confirmar tu suscripción.</p>
+            </div>
+            <button class="notification-close" onclick="closeNotification()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" id="navLogo" onclick="scrollToHero()">
+                <img src="images/white-bull.png" alt="FinnVest Logo" class="cow-logo">
+                <img src="images/finnvest-logo.png" alt="FinnVest Platform" class="finnvest-logo">
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Inicio</a>
+                <a href="#learn" class="nav-link">Aprende</a>
+                <a href="#levels" class="nav-link">Niveles</a>
+                <a href="#practice" class="nav-link">Practica</a>
+                <a href="#why-finnvest" class="nav-link">¿Por qué?</a>
+                <a href="#waitlist" class="nav-link cta-nav-button">¡Únete!</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Hero section is now clean - only navigation and logo remain -->
+        <div style="color: white; font-size: 50px; text-align: center; padding-top: 200px;">TEST - IF YOU SEE THIS, CHANGES ARE WORKING!</div>
+    </section>
+
+    <!-- Learn Section (Second Section) -->
+    <section id="learn" class="learn-section">
+        <div class="learn-content">
+            <img src="images/white-bull.png" alt="FinnVest Mascot" class="learn-mascot">
+            <h2 class="learn-title">FinnVest te enseña a<br>invertir desde cero</h2>
+            <ul class="learn-list">
+                <li class="learn-item learn-item-quizzes">
+                    <i class="fa-solid fa-award"></i>
+                    <span>+300 quizzes interactivos</span>
+                </li>
+                <li class="learn-item learn-item-simulator">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Simulador de inversiones 100% gratuito</span>
+                </li>
+                <li class="learn-item learn-item-minutes">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>De principiante a experto con tan solo <strong>5 minutos al día</strong></span>
+                </li>
+            </ul>
+            <a href="#waitlist" class="learn-button">¡Quiero aprender!</a>
+        </div>
+    </section>
+
+    <!-- Levels Section (Knowledge Levels) -->
+    <section id="levels" class="levels-section">
+        <div class="levels-content">
+            <h2 class="levels-title">Tu ruta de aprendizaje</h2>
+            <p class="levels-subtitle">Avanza paso a paso: de <strong>Principiante</strong> a <strong>Experto</strong></p>
+            <div class="levels-grid">
+                <article class="level-card level-beginner">
+                    <h3>Principiante</h3>
+                    <div class="level-actions">
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">📘</span><span>Conceptos básicos de inversión</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">📊</span><span>Cómo funciona el mercado</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">💸</span><span>Cómo invertir</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🧭</span><span>Qué bróker elegir</span></a>
+                    </div>
+                </article>
+                <article class="level-card level-intermediate">
+                    <h3>Intermedio</h3>
+                    <div class="level-actions">
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">📄</span><span>Estados financieros</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">📈</span><span>ETFs (Fondos Cotizados en Bolsa)</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🏢</span><span>Análisis exhaustivo de empresas</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🪙</span><span>Introducción a las criptomonedas</span></a>
+                    </div>
+                </article>
+                <article class="level-card level-advanced">
+                    <h3>Avanzado</h3>
+                    <div class="level-actions">
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🧮</span><span>Estrategias de valoración de empresas</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🏠</span><span>Inversión en bienes raíces</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🚀</span><span>Startups y VC</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🔁</span><span>Recompra de acciones</span></a>
+                    </div>
+                </article>
+                <article class="level-card level-expert">
+                    <h3>Experto</h3>
+                    <div class="level-actions">
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🎓</span><span>Economía 101</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🌐</span><span>Organización Mundial del Comercio</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🔄</span><span>Ciclos económicos</span></a>
+                        <a class="pill-btn" href="#waitlist"><span class="pill-emoji">🚫</span><span>Delitos en el mercado de valores</span></a>
+                    </div>
+                </article>
+            </div>
+            <p class="levels-more">…y eso es solo el comienzo. ¡Hay muchos más módulos por descubrir! ✨</p>
+        </div>
+    </section>
+
+    <!-- Practice Section -->
+    <section id="practice" class="practice-section">
+        <div class="section-content">
+            <h2 class="section-title gradient-text">
+                Practica sin riesgo
+            </h2>
+            <p class="section-description">
+                Simula inversiones reales con dinero virtual. Aprende de tus errores sin perder un peso.
+            </p>
+            <div class="practice-visual">
+                <div class="practice-left">
+                    <div class="practice-card">
+                        <div class="practice-icon">🛡️</div>
+                        <div class="practice-card-content">
+                            <h3>100% Seguro</h3>
+                            <p>Dinero virtual, resultados reales</p>
+                        </div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="practice-icon">📈</div>
+                        <div class="practice-card-content">
+                            <h3>Mercado Real</h3>
+                            <p>Condiciones auténticas de trading</p>
+                        </div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="practice-icon">🎯</div>
+                        <div class="practice-card-content">
+                            <h3>Sin Límites</h3>
+                            <p>Practica las veces que necesites</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="practice-right">
+                    <div class="app-image-container">
+                        <img src="images/investing.png" alt="FinnVest App - Practica sin riesgo" class="app-image">
+                    </div>
+                </div>
+            </div>
+            <div class="practice-cta">
+                <a href="#waitlist" class="practice-button">Comenzar a practicar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why FinnVest Section -->
+    <section id="why-finnvest" class="why-finnvest-section">
+        <div class="section-content">
+            <h2 class="section-title gradient-text">
+                ¿Por qué elegir FinnVest?
+            </h2>
+            <p class="section-description">
+                Los cursos de inversión son caros y complicados. Sin conocimiento, pierdes dinero. 
+                FinnVest es la solución perfecta: accesible, divertida y sin riesgo.
+            </p>
+            <div class="comparison-container">
+                <div class="comparison-side comparison-left">
+                    <div class="comparison-card expensive-courses">
+                        <div class="comparison-icon">💰</div>
+                        <h3>Cursos Caros</h3>
+                        <ul>
+                            <li>Precios de $500 - $2000</li>
+                            <li>Para personas ya experimentadas</li>
+                            <li>Teoría aburrida sin práctica</li>
+                            <li>Horarios fijos</li>
+                        </ul>
+                        <div class="price-tag">$500+</div>
+                    </div>
+                </div>
+                <div class="comparison-center">
+                    <div class="finnvest-highlight">
+                        <h3>FinnVest</h3>
+                        <div class="finnvest-features">
+                            <div class="feature-pill">🎮 Gamificado</div>
+                            <div class="feature-pill">📱 Fácil de usar</div>
+                            <div class="feature-pill">🌍 Juega en cualquier lugar</div>
+                            <div class="feature-pill">🧠 Mayor retención de conocimiento</div>
+                            <div class="feature-pill">🛡️ Practica sin riesgo</div>
+                        </div>
+                        <div class="price-tag affordable">Accesible</div>
+                    </div>
+                </div>
+                <div class="comparison-side comparison-right">
+                    <div class="comparison-card investing-blind">
+                        <div class="comparison-icon">💸</div>
+                        <h3>Invertir sin conocimiento</h3>
+                        <ul>
+                            <li>Comisiones ocultas</li>
+                            <li>Tasas que no conocías</li>
+                            <li>Pérdidas por malas decisiones</li>
+                            <li>Terminas dejando de invertir</li>
+                        </ul>
+                        <div class="price-tag loss">Pérdidas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Final CTA Section -->
+    <section id="waitlist" class="final-cta-section">
+        <!-- Floating Elements -->
+        <div class="cta-floating-elements">
+            <div class="floating-element element-1">💰</div>
+            <div class="floating-element element-2">📈</div>
+            <div class="floating-element element-3">🎯</div>
+            <div class="floating-element element-4">🚀</div>
+            <div class="floating-element element-5">💎</div>
+        </div>
+        <div class="section-content">
+            <div class="cta-content">
+                <h2 class="cta-title">
+                    Tu viaje hacia la independencia financiera empieza aquí
+                </h2>
+                <p class="cta-subtitle">
+                    Únete a miles de jóvenes que ya están construyendo su futuro financiero
+                </p>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <div class="feature-icon">⚡</div>
+                        <span>Empieza ahora</span>
+                    </div>
+                    <div class="cta-feature">
+                        <div class="feature-icon">🎯</div>
+                        <span>Sin compromiso</span>
+                    </div>
+                    <div class="cta-feature">
+                        <div class="feature-icon">🚀</div>
+                        <span>Resultados rápidos</span>
+                    </div>
+                </div>
+                <form class="final-cta-input-group" id="finalForm">
+                    <div class="input-container">
+                        <input type="email" 
+                               id="finalEmailInput" 
+                               name="email"
+                               class="final-cta-input" 
+                               placeholder="Ingresa tu email" 
+                               autocomplete="email"
+                               inputmode="email"
+                               autocapitalize="off"
+                               autocorrect="off"
+                               spellcheck="false"
+                               required>
+                        <button type="submit" class="final-cta-button">
+                            <span>¡Quiero empezar!</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+                <p class="cta-note">Sin tarjetas • Sin spam • Cancela cuando quieras</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.png?v=6.4" alt="FinnVest Logo" class="footer-cow-logo">
+                <img src="finnvest.png?v=6.4" alt="FinnVest Platform" class="footer-finnvest-logo">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/finnvest_edu/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/finnvest-edu" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.facebook.com/share/1CncpQwrjN/?mibextid=wwXIfr" target="_blank" class="social-link">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Messages -->
+    <div class="waiting-success" id="waitingSuccess" style="display: none;">
+        <i class="fas fa-check-circle"></i>
+        <p>¡Perfecto! Te hemos agregado a la lista de espera. Te notificaremos cuando esté disponible.</p>
+    </div>
+
+    <div class="final-success" id="finalSuccess" style="display: none;">
+        <i class="fas fa-check-circle"></i>
+        <p>¡Excelente! Ya formas parte de la comunidad FinnVest. Tu futuro financiero está más cerca.</p>
+    </div>
+</body>
+</html> 
